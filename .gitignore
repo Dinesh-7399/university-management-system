@@ -1,0 +1,102 @@
+# =========================================================================
+# SynergyLearn Monorepo .gitignore
+# =========================================================================
+
+# -------------------------------------
+# --- IDEs and Editor Configuration ---
+# -------------------------------------
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*~
+
+# -------------------------------------
+# --- OS-generated Files ---
+# -------------------------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+# Windows
+Thumbs.db
+
+# -------------------------------------
+# --- Node.js & Dependency Management ---
+# -------------------------------------
+# The node_modules directory is the most important to ignore
+**/node_modules
+node_modules/
+
+# Lockfiles - depends on package manager, but good to ignore them all
+# in a monorepo root to let workspaces handle their own if needed.
+# If you commit your lockfile (recommended), you can comment this out.
+# pnpm-lock.yaml
+# package-lock.json
+# yarn.lock
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# -------------------------------------
+# --- General Build Artifacts & Caches ---
+# -------------------------------------
+**/dist
+dist/
+**/build
+build/
+**/.turbo
+.turbo/
+**/coverage
+coverage/
+*.log
+
+# -------------------------------------
+# --- Next.js Specific ---
+# -------------------------------------
+# Ignore Next.js's build output and cache directories
+**/.next/
+.next/
+**/out/
+
+# -------------------------------------
+# --- TypeScript Specific ---
+# -------------------------------------
+# Ignore compiled TypeScript files if you have a non-standard build setup
+# (Note: Next.js and ts-node typically handle this in memory or in .next/ and dist/)
+*.tsbuildinfo
+*.js
+*.js.map
+# (Only if JS files are generated next to TS files, which is not the case in our structure)
+
+# -------------------------------------
+# --- Security - Environment Variables ---
+# -------------------------------------
+# DO NOT COMMIT environment variables. They contain sensitive data like
+# database passwords and API keys. Use a .env.example instead.
+.env
+.env*.local
+.env.development.local
+.env.test.local
+.env.production.local
+!.env.example
+!.env.ci
+
+# -------------------------------------
+# --- Prisma Specific ---
+# -------------------------------------
+# The Prisma client is generated into node_modules, but in case of
+# custom output paths, it's good to have this.
+/packages/db/generated/
+
+# --- Other Tooling ---
+# ESLint cache
+.eslintcache
