@@ -1,9 +1,1 @@
-{
-  "compilerOptions": {
-    "esModuleInterop": true,
-    "target": "es2020",
-    "module": "commonjs",
-    "strict": true,
-    "outDir": "./dist",
-  }
-}
+{ "extends": "../../tsconfig.json", "compilerOptions": { "outDir": "dist", "module": "NodeNext", "moduleResolution": "NodeNext" }, "include": ["src"] }

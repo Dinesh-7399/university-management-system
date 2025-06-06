@@ -1,8 +1,1 @@
-import app from './app';
-import 'dotenv/config'; // Make sure environment variables are loaded
-
-const PORT = process.env.PORT || 4000; // Use port from .env or default to 4000
-
-app.listen(PORT, () => {
-    console.log(`íº€ Server is listening on http://localhost:${PORT}`);
-});
+import { app } from './app.js'; import * as dotenv from 'dotenv'; dotenv.config(); const port = process.env.API_PORT || 4000; app.listen(port, () => { console.log(`íº€ SynergyLearn API server is running at http://localhost:${port}`); });

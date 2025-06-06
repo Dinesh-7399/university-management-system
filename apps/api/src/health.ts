@@ -1,32 +1,24 @@
-import { Router, Request, Response } from 'express';
-import prisma from './lib/prisma';
+import { Router } from 'express';
+import { prisma } from '@synergylearn/db';
 
-const router = Router();
+const healthRouter = Router();
 
-router.get('/', async (req: Request, res: Response) => {
-    // Log that a health check is being attempted
-    console.log('[Health Check] Received request. Attempting to query database...');
-    
-    try {
-        await prisma.$queryRawUnsafe('SELECT 1');
-
-        // Log the success message
-        console.log('[Health Check] SUCCESS: Database connection is healthy.');
-
-        res.status(200).json({
-            status: 'ok',
-            db_connection: 'healthy',
-        });
-    } catch (error) {
-        // Log the specific error for debugging
-        console.error('[Health Check] FAILED: Database connection is unhealthy.', error);
-        
-        res.status(503).json({
-            status: 'error',
-            db_connection: 'unhealthy',
-            error: (error as Error).message, // Also provide the error message in the API response
-        });
-    }
+healthRouter.get('/v1/health', async (_req, res, next) => {
+  try {
+    await prisma.$queryRaw`SELECT 1`;
+    res.status(200).json({
+      status: 'OK',
+      message: 'API is healthy and connected to the database.',
+      timestamp: new Date().toISOString(),
+    });
+  } catch (error) {
+    console.error("Health check failed:", error);
+    res.status(503).json({
+      status: 'ERROR',
+      message: 'API is running but the database is unreachable.',
+    });
+    next(error);
+  }
 });
 
-export { router as healthRouter };
+export { healthRouter };
